@@ -22,7 +22,7 @@ export default function SignUp() {
   const navigate = useNavigate();
 
   const registerUser = () => {
-    axios.post('/register', {
+    axios.post('http://localhost:3001/register', {
       fname,
       lname,
       password,
