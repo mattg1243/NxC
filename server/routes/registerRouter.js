@@ -1,9 +1,9 @@
-const router = require('express').Router();
-
+import express from 'express';
+const router = express.Router();
 // when a new user registers 
 router.post("/", (req, res) => {
   
 })
 
-
-module.exports = router;
+const registerRouter = router;
+export default registerRouter;
