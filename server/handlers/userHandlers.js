@@ -1,4 +1,4 @@
-import User from "../schemas/user";
+import User from "../schemas/user.js";
 
 export function registerUser(req, res) {
   // make sure the passwords match and handle when they dont
