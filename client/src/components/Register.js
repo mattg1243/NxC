@@ -14,8 +14,7 @@ const theme = createTheme();
 
 export default function SignUp() {
   
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   
@@ -23,13 +22,14 @@ export default function SignUp() {
 
   const registerUser = () => {
     axios.post('http://localhost:3001/register', {
-      fname,
-      lname,
+      email,
       password,
       confirmPassword
     }).then(response => {
-      console.log(response);
-      navigate('/login');
+      // navigate to the login page on good repsonse
+      if (response.status === 200) {
+        navigate('/login');    // not sure why this isnt working...
+      };
     }).catch(err => {
       console.error(err);
     })
@@ -51,27 +51,6 @@ export default function SignUp() {
           <h2 className="Logo">NxC</h2>
           <Box component="form" noValidate onSubmit={registerUser} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
@@ -80,6 +59,7 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={ e => setEmail(e.target.value) }
                 />
               </Grid>
               <Grid item xs={12}>
@@ -91,6 +71,19 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={ e => setPassword(e.target.value) }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="confirmPassword"
+                  label="Confirm Password"
+                  type="password"
+                  id="confirmPassword"
+                  autoComplete="new-password"
+                  onChange={ e => setConfirmPassword(e.target.value) }
                 />
               </Grid>
               <Grid item xs={12}>
